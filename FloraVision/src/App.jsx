@@ -11,7 +11,7 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div>
+    <div className='bg-[url(./assets./hero.png)]'>
       <Navbar />
       <LandingPage />
       <Cart/>

@@ -1,38 +1,50 @@
-import React from 'react'
+import React from 'react';
+import { cartDetails } from '../data/cartDetails';
 
-const Cart = () => {
+export default function Cart() {
   return (
-    <div className='flex flex-col gap-8 items-center justify-center '>Our Trendy plants
-        <div className='flex flex-col md:flex-row w-full gap-4  border-full rounded-full bg-amber-50 '>
-        <div className='w-full md:w-1/2 p-2'>
-            <img src="" alt="" />
-        </div>
-        <div className='w-full md:w-1/2 p-2'>
-            <h1>For Your Desks Decoration</h1>
-            <h2 className='text-xs'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error eveniet itaque, maxime iusto totam architecto accusantium amet dicta at tempore. Quibusdam, enim fugit! Nisi pariatur, obcaecati recusandae animi laboriosam accusantium.</h2>
-            <h1>Rs. 599/-</h1>
-            <div className='flex items-center p-2 gap-4'>
-                <div className='border rounded-md p-1 px-3' >explore</div>
-                <div className='border rounded-md p-1'>tag</div>
-            </div>
-        </div>
-    </div>
-    <div className='flex flex-col md:flex-row w-full gap-4  border-full rounded-full bg-amber-50 '>
-        <div className='w-full md:w-1/2 p-2'>
-            <img src="" alt="" />
-        </div>
-        <div className='w-full md:w-1/2 p-2'>
-            <h1>For Your Desks Decoration</h1>
-            <h2 className='text-xs'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error eveniet itaque, maxime iusto totam architecto accusantium amet dicta at tempore. Quibusdam, enim fugit! Nisi pariatur, obcaecati recusandae animi laboriosam accusantium.</h2>
-            <h1>Rs. 599/-</h1>
-            <div className='flex items-center p-2 gap-4'>
-                <div className='border rounded-md p-1 px-3' >explore</div>
-                <div className='border rounded-md p-1'>tag</div>
-            </div>
-        </div>
-    </div>
-    </div>
-  )
-}
+    <div className="flex flex-col gap-8 items-center justify-center p-6 my-10">
+      <h1 className="text-3xl font-extrabold text-gray-800 tracking-wide border-b-2 border-amber-500 pb-2">
+        Our Trendy Plants
+      </h1>
+      
+      <div className="w-full flex flex-col items-center gap-6">
+        {cartDetails.map((plant, index) => {
+          const isReversed = index % 2 !== 0;
 
-export default Cart
+          return (
+            <div 
+              key={plant.id} 
+              className={`flex flex-col w-full max-w-4xl gap-4 border border-amber-200 rounded-3xl bg-amber-50 overflow-hidden shadow-sm transition-all duration-300
+                ${isReversed ? 'md:flex-row-reverse' : 'md:flex-row'}`}
+            >
+
+              <div className="w-full md:w-1/2 p-2  flex items-center justify-center">
+                <img 
+                  src="https://unsplash.com" 
+                  alt={plant.heading} 
+                  className="w-full h-58 md:h-64 object-cover rounded-2xl" 
+                />
+              </div>
+
+              <div className="w-full md:w-1/2 p-6 flex flex-col justify-center">
+                <h1 className="text-xl font-bold text-gray-800">{plant.heading}</h1>
+                <h2 className="text-xs text-gray-600 my-3 leading-relaxed">{plant.description}</h2>
+                <h1 className="text-lg font-semibold text-amber-900">Rs. {plant.price}/-</h1>
+                
+                <div className="flex items-center gap-4 mt-4">
+                  <button className="border border-amber-700 text-amber-800 rounded-md p-1 px-4 text-sm font-medium hover:bg-amber-100 transition-colors">
+                    explore
+                  </button>
+                  <button className="border border-gray-300 text-gray-600 rounded-md p-1 px-3 text-sm hover:bg-gray-100 transition-colors">
+                    tag
+                  </button>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
